@@ -43,7 +43,7 @@ module gamehonghei.page {
 		}
 
 		private selectHandler(index: number): void {
-			this._viewUI.img_wanfa.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_WANFA_JIESHAO;
+			this._viewUI.panel_wanfa.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_WANFA_JIESHAO;
 			this._viewUI.img_beishu.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_BEISHU;
 		}
 
