@@ -3,7 +3,7 @@
 */
 module gamehonghei.page {
     export class HongheiZoushiPage extends game.gui.base.Page {
-        private _viewUI: ui.game_ui.honghei.HongHeiZouShiTuUI;
+        private _viewUI: ui.nqp.game_ui.honghei.HongHeiZouShiTuUI;
         private _hongheiMapInfo: HongheiMapInfo;
         private _gridEditor: GridEditor;
 
@@ -146,7 +146,7 @@ module gamehonghei.page {
         }
     }
 
-    class MapRecordRender1 extends ui.game_ui.honghei.component.HongHeiHongDianUI {
+    class MapRecordRender1 extends ui.nqp.game_ui.honghei.component.HongHeiHongDianUI {
         private _game: Game;
         private _data: any;
         constructor() {
@@ -167,7 +167,7 @@ module gamehonghei.page {
         }
     }
 
-    class MapRecordRender2 extends ui.game_ui.honghei.component.DuiZiUI {
+    class MapRecordRender2 extends ui.nqp.game_ui.honghei.component.DuiZiUI {
         private _game: Game;
         private _data: any;
         constructor() {

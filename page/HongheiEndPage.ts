@@ -3,7 +3,7 @@
 */
 module gamehonghei.page{
 	export class HongheiEndPage extends game.gui.base.Page {
-		private _viewUI: ui.game_ui.honghei.StopUI;
+		private _viewUI: ui.nqp.game_ui.honghei.StopUI;
 		
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);

@@ -4,7 +4,7 @@
 module gamehonghei.page {
 	const STATUS_CONFIG = ["准备中", "游戏开始", "洗牌中", "发牌中", "下注中", "停止下注", "开牌中", "结算中", "结算结果展示", "准备中"];
 	export class HongheiPageOld extends game.gui.base.Page {
-		private _viewUI: ui.game_ui.honghei.HongHei_HUDUI;
+		private _viewUI: ui.nqp.game_ui.honghei.HongHei_HUDUI;
 		private _player: any;
 		private _playerInfo: any;
 		private _listState: any;
