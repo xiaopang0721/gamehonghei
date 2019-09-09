@@ -28,11 +28,7 @@ module gamehonghei.page {
 		static myinit(str: string) {
 			super.myinit(str);
 			HongheiClip.init();
-			if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-				PageDef._pageClassMap[HongheiPageDef.PAGE_HHDZ] = HongheiPage;
-			} else {
-				PageDef._pageClassMap[HongheiPageDef.PAGE_HHDZ] = HongheiPageOld;
-			}
+			PageDef._pageClassMap[HongheiPageDef.PAGE_HHDZ] = HongheiPage;
 			PageDef._pageClassMap[HongheiPageDef.PAGE_HHDZ_MAP] = HongheiMapPage;
 			PageDef._pageClassMap[HongheiPageDef.PAGE_HHDZ_BEGIN] = HongheiBeginPage;
 			PageDef._pageClassMap[HongheiPageDef.PAGE_HHDZ_RULE] = HongheiRulePage;
