@@ -16,6 +16,7 @@ module gamehonghei.page {
 			this._asset = [
 				Path_game_honghei.atlas_game_ui + "honghei.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
 			];
 		}

@@ -27,10 +27,10 @@ module gamehonghei.page {
                 "R": PathGameTongyong.ui_tongyong_general + "tu_yq2.png",//红
                 "B": PathGameTongyong.ui_tongyong_general + "tu_yq1.png",//黑
             }
-            this._gridEditor = new GridEditor(31.93, 31.7, 20, 6, textureTypes, false)
-            this._gridEditor.x = 63;
-            this._gridEditor.y = 103;
-            this._viewUI.list_game_result.parent.addChild(this._gridEditor);
+            this._gridEditor = new GridEditor(36.8, 34.3, 20, 6, textureTypes, false)
+            this._gridEditor.x = 1.5;
+            this._gridEditor.y = -0.5;
+            this._viewUI.box_road.addChild(this._gridEditor);
         }
 
         private renderHandler1(cell: MapRecordRender1, index: number) {

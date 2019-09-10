@@ -69,8 +69,8 @@ module gamehonghei.page {
         private _betMainList: Array<any> = [0, 0, 0, 0, 0, 0, 0];//区域下注总额集合（主玩家）
         private _rebetList: Array<number> = [0, 0, 0, 0, 0, 0, 0];//重复下注列表(7个区域)
         private _mainHeadPos: any = [[0, 0], [0, -10]];//主玩家座位头像初始位置
-        private _headStartPos: any = [[0, 0], [0, 148], [0, 296], [0, 0], [0, 148], [0, 296]];//座位头像初始位置
-        private _headEndPos: any = [[10, 0], [10, 148], [10, 296], [-10, 0], [-10, 148], [-10, 296]];//座位头像移动位置
+        private _headStartPos: any = [[0, 0], [0, 157], [0, 314], [0, 0], [0, 157], [0, 314]];//座位头像初始位置
+        private _headEndPos: any = [[10, 0], [10, 157], [10, 314], [-10, 0], [-10, 157], [-10, 314]];//座位头像移动位置
         private _htmlText: laya.html.dom.HTMLDivElement;
         private _htmlTextArr: Array<laya.html.dom.HTMLDivElement>;
         private _resultArry: Array<number> = [];
