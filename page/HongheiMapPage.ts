@@ -199,8 +199,7 @@ module gamehonghei.page {
         }
 
         private onUpdateAniDeal(): void {
-            this._viewUI.ani_deal.ani1.stop();
-            this._viewUI.ani_deal.visible = false;
+            this._viewUI.paixieRight.ani2.gotoAndStop(0);
         }
 
         private onSeeCardOver(index: number): void {
@@ -236,8 +235,7 @@ module gamehonghei.page {
                 this.onUpdateStatus();
                 this.updateOnline();
                 if (!this._hongheiMgr.isReconnect) {
-                    this._viewUI.ani_deal.ani1.stop();
-                    this._viewUI.ani_deal.visible = false;
+                    this._viewUI.paixieRight.ani2.gotoAndStop(0);
                 }
             }
         }
@@ -760,8 +758,7 @@ module gamehonghei.page {
                     this._viewUI.txt_status.text = "";
                     this._viewUI.box_status.visible = true;
                     this._viewUI.clip_status.index = 4;
-                    this._viewUI.ani_deal.visible = true;
-                    this._viewUI.ani_deal.ani1.play(0, true);
+                    this._viewUI.paixieRight.ani2.play(0, true);
                     break;
                 case MAP_STATUS.PLAY_STATUS_BET:// 下注阶段
                     if (Math.floor(this._hongheiMapInfo.GetCountDown() - this._game.sync.serverTimeBys) >= 14) {
@@ -1284,8 +1281,7 @@ module gamehonghei.page {
             this._viewUI.box_time.visible = false;
             this._viewUI.xipai.visible = false;
             this._viewUI.paixieRight.ani_chupai.stop();
-            this._viewUI.ani_deal.ani1.stop();
-            this._viewUI.ani_deal.visible = false;
+            this._viewUI.paixieRight.ani2.gotoAndStop(0);
             this._viewUI.box_hong.visible = false;
             this._viewUI.box_hei.visible = false;
             this._viewUI.btn_repeat.disabled = true;
@@ -1403,7 +1399,7 @@ module gamehonghei.page {
                 this._viewUI.kaipaiHong.ani_kaipai.off(LEvent.COMPLETE, this, this.onSeeCardOver);
                 this._viewUI.kaipaiHei.ani_kaipai.off(LEvent.COMPLETE, this, this.onSeeCardOver);
                 this._viewUI.paixieRight.ani_chupai.stop();
-                this._viewUI.ani_deal.ani1.stop();
+                this._viewUI.paixieRight.ani2.gotoAndStop(0);
                 if (this._hongheiMgr) {
                     this._hongheiMgr.off(HongheiMgr.DEAL_OVER, this, this.onUpdateAniDeal);
                     this._hongheiMgr.off(HongheiMgr.OPEN_OVER, this, this.onOpenCardOver);

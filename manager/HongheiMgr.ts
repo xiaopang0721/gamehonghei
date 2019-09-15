@@ -133,7 +133,7 @@ module gamehonghei.manager {
 			let counter = 0;
 			for (let j: number = 0; j < HongheiMgr.MAX_CARD_COUNT; j++) {
 				for (let i: number = 0; i < this._cards.length / HongheiMgr.MAX_CARD_COUNT; i++) {
-					Laya.timer.once(150 * count, this, () => {
+					Laya.timer.once(120 * count, this, () => {
 						this._game.playSound(PathGameTongyong.music_tongyong + "fapai.mp3", false);
 						let card = this._cards[i * HongheiMgr.MAX_CARD_COUNT + j];
 						if (!card) return;
