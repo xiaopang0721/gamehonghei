@@ -721,6 +721,9 @@ module gamehonghei.page {
             this._curStatus = mapStatus;
             this._viewUI.btn_repeat.disabled = this._curStatus != MAP_STATUS.PLAY_STATUS_BET;
             this._viewUI.paixieRight.cards.visible = this._curStatus > MAP_STATUS.PLAY_STATUS_WASH_CARD || this._curStatus == MAP_STATUS.PLAY_STATUS_STOP_BET;
+            if (this._curStatus > MAP_STATUS.PLAY_STATUS_WASH_CARD){
+                this._viewUI.paixieRight.ani_chupai.gotoAndStop(12);
+            }
             this._viewUI.box_status.visible = false;
             switch (this._curStatus) {
                 case MAP_STATUS.PLAY_STATUS_NONE:// 准备阶段
