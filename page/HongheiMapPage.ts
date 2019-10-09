@@ -87,7 +87,7 @@ module gamehonghei.page {
                 PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
                 Path_game_honghei.atlas_game_ui + "honghei.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "tuichu.atlas",
-                PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
+                DatingPath.atlas_dating_ui + "qifu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/suiji.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/fapai_1.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/xipai.atlas",
