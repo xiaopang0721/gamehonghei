@@ -699,7 +699,7 @@ module gamehonghei.page {
             this._curStatus = mapStatus;
             this._viewUI.btn_repeat.disabled = this._curStatus != MAP_STATUS.PLAY_STATUS_BET;
             this._viewUI.paixieRight.cards.visible = this._curStatus > MAP_STATUS.PLAY_STATUS_WASH_CARD || this._curStatus == MAP_STATUS.PLAY_STATUS_STOP_BET;
-            if (this._curStatus > MAP_STATUS.PLAY_STATUS_WASH_CARD){
+            if (this._curStatus > MAP_STATUS.PLAY_STATUS_WASH_CARD) {
                 this._viewUI.paixieRight.ani_chupai.gotoAndStop(12);
             }
             this._viewUI.box_status.visible = false;
@@ -1166,6 +1166,7 @@ module gamehonghei.page {
                     seat.txt_name.text = "";
                     seat.txt_money.text = "点击入座";
                     seat.img_icon.skin = PathGameTongyong.ui_tongyong_general + "tu_weizi.png";
+                    seat.img_txk.visible = false;
                     seat.img_qifu.visible = false;
                     seat.qifu_type.visible = false;
                 }
