@@ -64,10 +64,10 @@ module gamehonghei.page {
         private _curChipY: number;//当前选择筹码y轴位置
         private _chipSortScore: number = 0;//筹码层级
         private _unitSeated: Array<any> = [];//入座精灵信息集合
-        private _chipTotalList: Array<any> = [[], [], [], [], [], [], []];//区域绘制筹码集合
-        private _betTotalList: Array<any> = [0, 0, 0, 0, 0, 0, 0];//区域下注总额集合（所有玩家）
-        private _betMainList: Array<any> = [0, 0, 0, 0, 0, 0, 0];//区域下注总额集合（主玩家）
-        private _rebetList: Array<number> = [0, 0, 0, 0, 0, 0, 0];//重复下注列表(7个区域)
+        private _chipTotalList: Array<any> = [[], [], []];//区域绘制筹码集合
+        private _betTotalList: Array<any> = [0, 0, 0];//区域下注总额集合（所有玩家）
+        private _betMainList: Array<any> = [0, 0, 0];//区域下注总额集合（主玩家）
+        private _rebetList: Array<number> = [0, 0, 0];//重复下注列表(3个区域)
         private _mainHeadPos: any = [[0, 0], [0, -10]];//主玩家座位头像初始位置
         private _headStartPos: any = [[0, 0], [0, 158], [0, 316], [0, 0], [0, 158], [0, 316]];//座位头像初始位置
         private _headEndPos: any = [[10, 0], [10, 158], [10, 316], [-10, 0], [-10, 158], [-10, 316]];//座位头像移动位置
@@ -469,16 +469,8 @@ module gamehonghei.page {
         }
 
         private updateBetNum(): void {
-            for (let i = 0; i < 7; i++) {
-                if (i < 3) {
-                    this._htmlTextArr[i].innerHTML = StringU.substitute("<span style='color:#ffd200'>{0}</span><span style='color:#ffffff'>/{1}</span>", this._betMainList[i], this._betTotalList[i]);
-                } else {
-                    this._txtTotalUIList[i].text = this._betTotalList[i];
-                }
-
-            }
-            for (let i = 0; i < 4; i++) {
-                this._txtBetUIList[i].text = this._betMainList[i + 3];
+            for (let i = 0; i < 3; i++) {
+                this._htmlTextArr[i].innerHTML = StringU.substitute("<span style='color:#ffd200'>{0}</span><span style='color:#ffffff'>/{1}</span>", this._betMainList[i], this._betTotalList[i]);
             }
         }
 
@@ -872,7 +864,7 @@ module gamehonghei.page {
                     break;
                 case this._viewUI.btn_back://返回
                     let totalBet = 0;
-                    for (let i = 0; i < 7; i++) {
+                    for (let i = 0; i < 3; i++) {
                         totalBet += this._betMainList[i];
                     }
                     if (totalBet && this._hongheiMapInfo && this._hongheiMapInfo.GetPlayState() == 1) {
@@ -970,7 +962,7 @@ module gamehonghei.page {
             }
             let money = this._game.sceneObjectMgr.mainUnit.GetMoney();
             let betBefore = 0;
-            for (let i = 0; i < 7; i++) {
+            for (let i = 0; i < 3; i++) {
                 betBefore += this._betMainList[i];
             }
             if (money + betBefore < PLAYER_LEAST_MONEY) {
@@ -1190,26 +1182,17 @@ module gamehonghei.page {
             this._htmlTextArr = [];
 
             //下注区域光效和文本
-            for (let i: number = 0; i < 7; i++) {
+            for (let i: number = 0; i < 3; i++) {
                 this._areaList.push(this._viewUI["area" + i]);
                 this._areaKuangUIList.push(this._viewUI["kuang" + i]);
                 this._txtTotalUIList.push(this._viewUI["txt_total" + i]);
                 this._areaKuangUIList[i].visible = false;
                 this._areaList[i].on(LEvent.CLICK, this, this.onAreaBetClick, [i]);
                 //下注文本：玩家下注数/总下注数
-                if (i < 3) {
-                    this._htmlTextArr[i] = TextFieldU.createHtmlText(this._txtTotalUIList[i]);
-                    this._htmlTextArr[i].style.lineHeight = 30;
-                    this._htmlTextArr[i].style.valign = "middle";
-                    this._htmlTextArr[i].innerHTML = "<span style='color:#ffd200'>0</span><span style='color:#ffffff'>/0</span>";
-                } else {
-                    this._txtTotalUIList[i].text = "0";
-                }
-            }
-            //玩家下注数文本
-            for (let i: number = 0; i < 4; i++) {
-                this._txtBetUIList.push(this._viewUI["txt_bet" + i]);
-                this._txtBetUIList[i].text = "0";
+                this._htmlTextArr[i] = TextFieldU.createHtmlText(this._txtTotalUIList[i]);
+                this._htmlTextArr[i].style.lineHeight = 30;
+                this._htmlTextArr[i].style.valign = "middle";
+                this._htmlTextArr[i].innerHTML = "<span style='color:#ffd200'>0</span><span style='color:#ffffff'>/0</span>";
             }
             //筹码选择区域
             for (let i: number = 0; i < 5; i++) {
@@ -1293,16 +1276,8 @@ module gamehonghei.page {
             //主玩家UI
             this._viewUI.main_player.clip_money.visible = false;
             //界面UI
-            for (let i = 0; i < 7; i++) {
-                if (i < 3) {
-                    this._htmlTextArr[i].innerHTML = "<span style='color:#ffd200'>0</span><span style='color:#ffffff'>/0</span>";
-                } else {
-                    this._txtTotalUIList[i].text = "0";
-                }
-            }
-            //玩家下注数文本
-            for (let i = 0; i < 4; i++) {
-                this._txtBetUIList[i].text = "0";
+            for (let i = 0; i < 3; i++) {
+                this._htmlTextArr[i].innerHTML = "<span style='color:#ffd200'>0</span><span style='color:#ffffff'>/0</span>";
             }
             this._viewUI.box_hong.visible = false;
             this._viewUI.box_hei.visible = false;
@@ -1312,11 +1287,11 @@ module gamehonghei.page {
             this._battleIndex = -1;
             this._cardsArr = [];
             this._resultArry = [];
-            for (let i = 0; i < 7; i++) {
+            for (let i = 0; i < 3; i++) {
                 this._chipTotalList[i] = [];
             }
-            this._betTotalList = [0, 0, 0, 0, 0, 0, 0];
-            this._betMainList = [0, 0, 0, 0, 0, 0, 0];
+            this._betTotalList = [0, 0, 0];
+            this._betMainList = [0, 0, 0];
             this._mainPlayerBenefit = 0;
             this._betMainTotal = 0;
             this._lottery = "";
