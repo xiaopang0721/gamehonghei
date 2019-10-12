@@ -212,7 +212,7 @@ module gamehonghei.page {
                 this._hongheiMgr.showcard(index);
                 let url = Path_game_honghei.ui_honghei + "brnntype_normal_{0}.png";
                 this._viewUI.box_hei.visible = true;
-                let cardType = this._resultArry[7] == 6 ? 0 : this._resultArry[7]
+                let cardType = this._resultArry[3] == 6 ? 0 : this._resultArry[3]
                 this._viewUI.img_card1Type.skin = StringU.substitute(url, cardType);
                 this._game.playSound(StringU.substitute(Path_game_honghei.music_honghei + "type{0}.mp3", cardType), false);
             } else {
@@ -221,7 +221,7 @@ module gamehonghei.page {
                 this._hongheiMgr.showcard(index);
                 let url = Path_game_honghei.ui_honghei + "brnntype_normal_{0}.png";
                 this._viewUI.box_hong.visible = true;
-                let cardType = this._resultArry[8] == 6 ? 0 : this._resultArry[8]
+                let cardType = this._resultArry[4] == 6 ? 0 : this._resultArry[4]
                 this._viewUI.img_card2Type.skin = StringU.substitute(url, cardType);
                 this._game.playSound(StringU.substitute(Path_game_honghei.music_honghei + "type{0}.mp3", cardType), false);
             }
@@ -511,12 +511,12 @@ module gamehonghei.page {
             this.addMoneyClip(info.SeatIndex, info.SettleVal);
         }
 
-        private areaName: string[] = ["红", "黑", "对8以上", "顺子", "金花", "顺金", "豹子"];
+        private areaName: string[] = ["红", "黑", "幸运一击"];
         private onBattleResult(info: any): void {
             for (let i = 0; i < info.Results.length; i++) {
                 if (i < this.areaName.length) {
                     //中奖区域
-                    if (info.Results[i] == 0) {
+                    if (info.Results[i] != 0) {
                         if (!this._lottery) {
                             this._lottery = this.areaName[i];
                         } else {
@@ -530,12 +530,12 @@ module gamehonghei.page {
         //结算飘筹码
         private flyChipEffect(): void {
             if (!this._resultArry.length) return
-            let location = this._resultArry[0] == 0 ? 2 : 9;
+            let location = this._resultArry[0] != 0 ? 2 : 9;
             for (let i = 0; i < this._chipTotalList.length; i++) {
                 let chipArr = [];
                 chipArr = this._chipTotalList[i];
                 //玩家输了
-                if (this._resultArry[i] == 1) {
+                if (this._resultArry[i] == 0) {
                     this._game.playSound(Path_game_honghei.music_honghei + "piaoqian.mp3", false);
                     for (let j = 0; j < chipArr.length; j++) {
                         let chip: HongheiChip = chipArr[j];
@@ -614,12 +614,12 @@ module gamehonghei.page {
             this._hongheiMgr.showcard(1);
             let url = Path_game_honghei.ui_honghei + "brnntype_normal_{0}.png";
             this._viewUI.box_hei.visible = true;
-            this._viewUI.img_card1Type.skin = StringU.substitute(url, this._resultArry[7] == 6 ? 0 : this._resultArry[7]);
+            this._viewUI.img_card1Type.skin = StringU.substitute(url, this._resultArry[3] == 6 ? 0 : this._resultArry[3]);
             this._viewUI.kaipaiHei.ani_kaipai.stop();
             this._viewUI.kaipaiHei.visible = false;
             this._hongheiMgr.showcard(2);
             this._viewUI.box_hong.visible = true;
-            this._viewUI.img_card2Type.skin = StringU.substitute(url, this._resultArry[8] == 6 ? 0 : this._resultArry[8]);
+            this._viewUI.img_card2Type.skin = StringU.substitute(url, this._resultArry[4] == 6 ? 0 : this._resultArry[4]);
         }
 
         private onBattleDeal(info: any): void {
@@ -784,12 +784,12 @@ module gamehonghei.page {
                         this.flyChipEffect();
                         if (this._resultArry.length) {
                             Laya.timer.once(500, this, () => {
-                                if (this._resultArry[0] == 0) {
+                                if (this._resultArry[0] == 1) {
                                     this._game.playSound(Path_game_honghei.music_honghei + "win_red.mp3");
                                     this._game.uiRoot.HUD.open(HongheiPageDef.PAGE_HHDZ_RESULT, (page) => {
                                         page.dataSource = 1;
                                     });
-                                } else if (this._resultArry[1] == 0) {
+                                } else if (this._resultArry[1] == 1) {
                                     this._game.playSound(Path_game_honghei.music_honghei + "win_black.mp3");
                                     this._game.uiRoot.HUD.open(HongheiPageDef.PAGE_HHDZ_RESULT, (page) => {
                                         page.dataSource = 0;

@@ -60,8 +60,8 @@ module gamehonghei.data {
 			}
 		}
 
-		private areaName: string[] = ["红", "黑", "对8以上", "顺子", "金花", "顺金", "豹子"];
-		private cardType: string[] = ["单张", "对子", "顺子", "金花", "顺金", "豹子"];
+		private areaName: string[] = ["红", "黑", "幸运一击"];
+		private cardType: string[] = ["单张", "对子", "顺子", "金花", "顺金", "豹子", "单张"];
 
 		public getBattleInfoToString(): string {
 			let playerArr: any[] = this._battleInfoMgr.users;
@@ -80,7 +80,7 @@ module gamehonghei.data {
 			if (!infoArr) return "";
 
 			let totalStr: string = "";
-			let betArr: number[] = [0, 0, 0, 0, 0, 0, 0];
+			let betArr: number[] = [0, 0, 0];
 			let betStr: Array<string> = [];
 			let lotteryStr: string = "";
 			let awardStr: string = "";
@@ -101,7 +101,7 @@ module gamehonghei.data {
 					for (let j = 0; j < info.Results.length; j++) {
 						if (j < this.areaName.length) {
 							//中奖区域
-							if (info.Results[j] == 0) {
+							if (info.Results[j] != 0) {
 								if (!awardStr) {
 									awardStr = this.areaName[j];
 								} else {
