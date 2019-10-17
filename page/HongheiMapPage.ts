@@ -128,10 +128,10 @@ module gamehonghei.page {
             this._viewUI.btn_set.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_zhanji.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_repeat.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-            this._viewUI.btn_playerList.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_qifu.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_road.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_chongzhi.on(LEvent.CLICK, this, this.onBtnClickWithTween);
+            this._viewUI.btn_playerList.on(LEvent.CLICK, this, this.onClickHandle);
 
             this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_ADD_UNIT, this, this.onUnitAdd);
             this._game.sceneObjectMgr.on(SceneObjectMgr.EVENT_REMOVE_UNIT, this, this.onUnitRemove);
@@ -838,14 +838,17 @@ module gamehonghei.page {
             this._pageHandle.reset();//清空额外界面存储数组
         }
 
+        //点击事件
+        protected onClickHandle(e: LEvent): void {
+            //玩家列表
+            this._game.uiRoot.general.open(HongheiPageDef.PAGE_HHDZ_PLAYER_LIST);
+        }
+
         //按钮缓动回调
         protected onBtnTweenEnd(e: any, target: any): void {
             switch (target) {
                 case this._viewUI.btn_spread://菜单
                     this.showMenu(true);
-                    break;
-                case this._viewUI.btn_playerList://玩家列表
-                    this._game.uiRoot.general.open(HongheiPageDef.PAGE_HHDZ_PLAYER_LIST);
                     break;
                 case this._viewUI.btn_road://大路详情
                     this._game.uiRoot.general.open(HongheiPageDef.PAGE_HHDZ_ZOUSHI);
@@ -1316,9 +1319,9 @@ module gamehonghei.page {
                 this._viewUI.btn_set.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.btn_zhanji.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.btn_repeat.off(LEvent.CLICK, this, this.onBtnClickWithTween);
-                this._viewUI.btn_playerList.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.btn_road.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.btn_qifu.off(LEvent.CLICK, this, this.onBtnClickWithTween);
+                this._viewUI.btn_playerList.off(LEvent.CLICK, this, this.onClickHandle);
 
                 this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_ADD_UNIT, this, this.onUnitAdd);
                 this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_REMOVE_UNIT, this, this.onUnitRemove);
