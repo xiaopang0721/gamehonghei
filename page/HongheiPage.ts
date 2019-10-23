@@ -25,7 +25,7 @@ module gamehonghei.page {
 
 		// 页面初始化函数
 		protected init(): void {
-			this._viewUI = this.createView('nqp.game_ui.honghei.HongHei_HUDUI', ["game_ui.tongyong.HudUI"]);
+			this._viewUI = this.createView('game_ui.honghei.HongHei_HUDUI', ["game_ui.tongyong.HudUI"]);
 			this.addChild(this._viewUI);
 			if (!this._hongheiHudMgr) {
 				this._hongheiHudMgr = new HongheiHudMgr(this._game);
