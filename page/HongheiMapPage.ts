@@ -869,7 +869,6 @@ module gamehonghei.page {
                     });
                     break;
                 case this._viewUI.btn_repeat://重复下注
-                    if (this.showIsGuest()) return;
                     this.repeatBet();
                     break;
                 case this._viewUI.btn_back://返回
@@ -893,7 +892,6 @@ module gamehonghei.page {
 
         //重复下注
         private repeatBet(): void {
-            if (this.showIsGuest()) return;
             if (this._betWait) return;//投注间隔
             let betArr = [];
             let total = 0;
@@ -947,7 +945,6 @@ module gamehonghei.page {
         //下注
         private _betWait: boolean = false;
         private onAreaBetClick(index: number, e: LEvent): void {
-            if (this.showIsGuest()) return;
             if (this._curStatus != MAP_STATUS.PLAY_STATUS_BET) {
                 this._game.uiRoot.topUnder.showTips("当前不在下注时间，请在下注时间再进行下注！");
                 return;
@@ -1016,7 +1013,6 @@ module gamehonghei.page {
 
         //选择座位入座
         private onSelectSeat(index: number): void {
-            if (this.showIsGuest()) return;
             let mainUnit = this._game.sceneObjectMgr.mainUnit;
             if (!mainUnit) return;
             if (mainUnit.GetMoney() < this._seatlimit) {
@@ -1046,16 +1042,6 @@ module gamehonghei.page {
                     }));
                 }
             }
-        }
-
-        private showIsGuest(): boolean {
-            if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_NQP) return false;
-            if (this._game.sceneObjectMgr.mainPlayer.IsIsGuest()) {
-                TongyongPageDef.ins.alertRecharge("亲爱的玩家，您正使用游客模式进行游戏，该模式下的游戏数据（包括付费数据）在删除游戏、更换设备后清空！对此造成的损失，本平台将不承担任何责任。为保障您的虚拟财产安全，我们强力建议您绑定手机号升级为正式账号。",
-                    () => { }, () => { }, true);
-                return true;
-            }
-            return false;
         }
 
         private resetAll(): void {
