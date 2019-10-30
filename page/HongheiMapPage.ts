@@ -1134,6 +1134,7 @@ module gamehonghei.page {
                     seat.img_txk.visible = true;
                     seat.img_vip.visible = unit.GetVipLevel() > 0;
                     seat.img_vip.skin = TongyongUtil.getVipUrl(unit.GetVipLevel());
+                    seat.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                     //祈福成功 头像上就有动画
                     if (qifu_index && unitIndex == qifu_index) {
                         seat.qifu_type.visible = true;
@@ -1147,14 +1148,13 @@ module gamehonghei.page {
                                 seat.img_qifu.visible = true;
                                 seat.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                             })
-                        } 
+                        }
                         // else {
                         //     seat.img_qifu.visible = true;
                         //     seat.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                         // }
                     } else {
                         seat.img_qifu.visible = false;
-                        seat.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                     }
                 } else {
                     seat.txt_name.text = "";
