@@ -152,6 +152,7 @@ module gamehonghei.page {
             this._game.qifuMgr.on(QiFuMgr.QIFU_FLY, this, this.qifuFly);
 
             this.onUpdateUnitOffline();
+            this.onUpdateCountDown();
             this.onUpdateSeatedList();
         }
 
