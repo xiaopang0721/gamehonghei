@@ -122,6 +122,9 @@ module gamehonghei.page {
         // 页面打开时执行函数
         protected onOpen(): void {
             super.onOpen();
+             //api充值不显示
+            this._viewUI.btn_chongzhi.visible = !WebConfig.enterGameLocked;
+            
             this._viewUI.btn_spread.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_back.on(LEvent.CLICK, this, this.onBtnClickWithTween);
             this._viewUI.btn_rule.on(LEvent.CLICK, this, this.onBtnClickWithTween);
@@ -152,6 +155,7 @@ module gamehonghei.page {
             this._game.qifuMgr.on(QiFuMgr.QIFU_FLY, this, this.qifuFly);
 
             this.onUpdateUnitOffline();
+            this.onUpdateCountDown();
             this.onUpdateSeatedList();
         }
 
@@ -485,12 +489,15 @@ module gamehonghei.page {
         private createChip(startIdx: number, targetIdx: number, type: number, value: number, index: number, unitIndex: number) {
             let chip = this._game.sceneObjectMgr.createOfflineObject(SceneRoot.CHIP_MARK, HongheiChip) as HongheiChip;
             chip.setData(startIdx, targetIdx, type, value, index, unitIndex);
+            chip.visible = false;
             this._chipTotalList[targetIdx - 1].push(chip);
             if (this._hongheiMgr.isReconnect && this._curStatus != MAP_STATUS.PLAY_STATUS_BET) {
+                chip.visible = true;
                 chip.drawChip();
             }
             else {
                 Laya.timer.once(350, this, () => {
+                    chip.visible = true;
                     chip.sendChip();
                     this._game.playSound(Path_game_honghei.music_honghei + "chouma.mp3", false);
                 })
@@ -1132,6 +1139,7 @@ module gamehonghei.page {
                     seat.img_txk.visible = true;
                     seat.img_vip.visible = unit.GetVipLevel() > 0;
                     seat.img_vip.skin = TongyongUtil.getVipUrl(unit.GetVipLevel());
+                    seat.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                     //祈福成功 头像上就有动画
                     if (qifu_index && unitIndex == qifu_index) {
                         seat.qifu_type.visible = true;
@@ -1145,14 +1153,13 @@ module gamehonghei.page {
                                 seat.img_qifu.visible = true;
                                 seat.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                             })
-                        } 
+                        }
                         // else {
                         //     seat.img_qifu.visible = true;
                         //     seat.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                         // }
                     } else {
                         seat.img_qifu.visible = false;
-                        seat.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                     }
                 } else {
                     seat.txt_name.text = "";
