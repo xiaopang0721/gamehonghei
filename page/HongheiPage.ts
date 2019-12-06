@@ -41,7 +41,7 @@ module gamehonghei.page {
 		protected onOpen(): void {
 			super.onOpen();
 			this._viewUI.btn_join.on(LEvent.CLICK, this, this.onBtnClickWithTween);
-			(this._viewUI.view as TongyongHudNqpPage).onOpen(this._game, HongheiPageDef.GAME_NAME);
+			(this._viewUI.view as TongyongHudPage).onOpen(this._game, HongheiPageDef.GAME_NAME);
 
 			let datas = [];
 			for (let i = 0; i < HongheiPage.BET_MAX.length; i++) {
