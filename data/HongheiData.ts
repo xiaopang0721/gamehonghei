@@ -7,7 +7,7 @@ module gamehonghei.data {
 			super();
 		}
 		//前两张牌X轴位置，牌Y轴位置，牌间隔距离
-		private _posList = [[165, 75, 85], [1115, 75, -85]];
+		private _posList = [[330, 75, 85], [950, 75, -85]];
 		private _curIdx: number;
 
 		myOwner(index: number) {

@@ -24,10 +24,10 @@ module gamehonghei {
             this.RANK_FONT2 = {
                 source: PathGameTongyong.atlas_game_ui_tongyong+ "general.atlas",
                 url: PathGameTongyong.ui_tongyong_general + 'clip_top.png',
-                clipWidth: 28,
-                clipHeight: 31,
-                clipX: 10,
-                space: 0
+                clipWidth: 40,
+                clipHeight: 50,
+                clipX: 11,
+                space: -10
             };
 
             //加钱飘字

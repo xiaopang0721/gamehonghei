@@ -3,7 +3,7 @@
 */
 module gamehonghei.page {
     export class HongheiZoushiPage extends game.gui.base.Page {
-        private _viewUI: ui.nqp.game_ui.honghei.HongHeiZouShiTuUI;
+        private _viewUI: ui.ajqp.game_ui.honghei.HongHeiZouShiTuUI;
         private _hongheiMapInfo: HongheiMapInfo;
         private _gridEditor: GridEditor;
 
@@ -27,10 +27,10 @@ module gamehonghei.page {
                 "R": PathGameTongyong.ui_tongyong_general + "tu_yq2.png",//红
                 "B": PathGameTongyong.ui_tongyong_general + "tu_yq1.png",//黑
             }
-            this._gridEditor = new GridEditor(36.8, 34.3, 20, 6, textureTypes, false)
-            this._gridEditor.x = 1.5;
-            this._gridEditor.y = -0.5;
-            this._viewUI.box_road.addChild(this._gridEditor);
+            this._gridEditor = new GridEditor(38.9, 38.9, 20, 6, textureTypes, false)
+			this._gridEditor.x = 1.2;
+			this._gridEditor.y = 1.4;
+			this._viewUI.box_road.addChild(this._gridEditor);
         }
 
         private renderHandler1(cell: MapRecordRender1, index: number) {
@@ -146,7 +146,7 @@ module gamehonghei.page {
         }
     }
 
-    class MapRecordRender1 extends ui.nqp.game_ui.honghei.component.HongHeiHongDianUI {
+    class MapRecordRender1 extends ui.ajqp.game_ui.honghei.component.HongHeiHongDianUI {
         private _game: Game;
         private _data: any;
         constructor() {
@@ -167,7 +167,7 @@ module gamehonghei.page {
         }
     }
 
-    class MapRecordRender2 extends ui.nqp.game_ui.honghei.component.DuiZiUI {
+    class MapRecordRender2 extends ui.ajqp.game_ui.honghei.component.DuiZiUI {
         private _game: Game;
         private _data: any;
         constructor() {
@@ -200,10 +200,10 @@ module gamehonghei.page {
                 this.txt_cardType.text = "豹子";
             }
             if (this._data == 1 || this._data == 2 || this._data == 7) {
-                this.img.skin = PathGameTongyong.ui_tongyong_general + "tu_dzdt.png";
+                this.img.skin = PathGameTongyong.ui_tongyong_general + "anniu/tu_dzdt0.png";
             }
             else {
-                this.img.skin = PathGameTongyong.ui_tongyong_general + "tu_dzdt1.png";
+                this.img.skin = PathGameTongyong.ui_tongyong_general + "anniu/tu_dzdt.png";
             }
         }
         destroy() {

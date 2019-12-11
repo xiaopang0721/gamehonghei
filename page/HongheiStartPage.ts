@@ -3,7 +3,7 @@
 */
 module gamehonghei.page {
 	export class HongheiStartPage extends game.gui.base.Page {
-		private _viewUI: ui.nqp.game_ui.honghei.BiPaiUI; 
+		private _viewUI: ui.ajqp.game_ui.honghei.BiPaiUI; 
 		
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
