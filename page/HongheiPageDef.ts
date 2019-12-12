@@ -33,6 +33,7 @@ module gamehonghei.page {
 
 			this["__needLoadAsset"] = [
 				DatingPath.atlas_dating_ui + "qifu.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
 				Path_game_honghei.atlas_game_ui + "honghei.atlas",
 				Path_game_honghei.atlas_game_ui + "honghei/effect/bipai.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
