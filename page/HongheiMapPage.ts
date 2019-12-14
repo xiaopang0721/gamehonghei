@@ -179,7 +179,10 @@ module gamehonghei.page {
         //帧间隔心跳
         deltaUpdate() {
             let bool = this._curStatus == MAP_STATUS.PLAY_STATUS_BET || this._curStatus == MAP_STATUS.PLAY_STATUS_SETTLE;
-            if (!bool) return;
+            if (!bool) {
+                this._viewUI.box_time.visible = false;
+                return;
+            }
             if (!this._hongheiMapInfo) return;
             let curTime = this._game.sync.serverTimeBys;
             let time = Math.floor(this._countDown - curTime);
@@ -892,7 +895,7 @@ module gamehonghei.page {
                     break;
                 case MAP_STATUS.PLAY_STATUS_SETTLE_SHOW:// 结算结果展示
                     this.flyChipEffect();
-                    Laya.timer.once(2200, this, () => {
+                    Laya.timer.once(2500, this, () => {
                         this.onUpdateSettleMoney();
                         if (this._clipResult && this._clipResult.length > 0) {
                             for (let i = 0; i < this._clipResult.length; i++) {
