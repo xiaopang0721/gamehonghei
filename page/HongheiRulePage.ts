@@ -37,6 +37,9 @@ module gamehonghei.page {
 			} else {
 				this._viewUI.btn_tab.selectedIndex = TYPE_INDEX.TYPE_WANFA_JIESHAO;
 			}
+			this._viewUI.img_wanfa.vScrollBarSkin = "";
+			this._viewUI.img_wanfa.vScrollBar.autoHide = true;
+			this._viewUI.img_wanfa.vScrollBar.elasticDistance = 100;
 		}
 
 		private selectHandler(index: number): void {
