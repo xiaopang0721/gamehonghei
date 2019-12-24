@@ -36,6 +36,7 @@ module gamehonghei.page {
 				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
 				Path_game_honghei.atlas_game_ui + "honghei.atlas",
 				Path_game_honghei.atlas_game_ui + "honghei/effect/bipai.atlas",
+				Path_game_honghei.ui_honghei_effect_sk + "honghei.png",
 				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "pai.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",

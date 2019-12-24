@@ -9,6 +9,7 @@ module gamehonghei.page {
 		private _player: any;
 		private _playerInfo: any;
 		private _hongheiHudMgr: HongheiHudMgr;
+		private _avatar: AvatarUIShow;
 
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);
@@ -21,6 +22,7 @@ module gamehonghei.page {
 				PathGameTongyong.atlas_game_ui_tongyong + "logo.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong_general + "anniu.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong_general_effect + "anniug.atlas",
+				Path_game_honghei.ui_honghei_effect_sk + "honghei.png",
 			];
 			this._isNeedDuang = false;
 		}
@@ -41,6 +43,11 @@ module gamehonghei.page {
 		protected onOpen(): void {
 			super.onOpen();
 			(this._viewUI.view as TongyongHudPage).onOpen(this._game, HongheiPageDef.GAME_NAME);
+			if (!this._avatar) {
+				this._avatar = new AvatarUIShow();
+				this._viewUI.box_sk.addChild(this._avatar);
+			}
+			this._avatar.loadSkeleton(Path_game_honghei.ui_honghei_effect_sk + "honghei", 213, 349);
 
 			let datas = [];
 			for (let i = 0; i < HongheiPage.BET_MAX.length; i++) {
@@ -59,6 +66,11 @@ module gamehonghei.page {
 			this._player = null;
 			if (this._viewUI) {
 				this._viewUI.list_room.dataSource = [];
+				if (this._avatar) {
+					this._avatar.clear();
+					this._avatar.destroy();
+					this._avatar = null;
+				}
 				if (this._hongheiHudMgr) {
 					this._hongheiHudMgr.off(HongheiHudMgr.EVENT_RETURN_MAPINFO, this, this.onUpdateMapinfo);
 					this._hongheiHudMgr.clear();
@@ -78,6 +90,9 @@ module gamehonghei.page {
 
 		//帧心跳
 		update(diff: number) {
+			if (this._avatar) {
+				this._avatar.onDraw();
+			}
 			if (this._hongheiHudMgr) {
 				this._hongheiHudMgr.update(diff);
 			}
