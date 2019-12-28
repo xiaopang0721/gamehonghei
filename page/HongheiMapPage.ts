@@ -31,12 +31,11 @@ module gamehonghei.page {
         "103": [50, 100, 500, 1000, 5000],  //老板
         "104": [100, 500, 1000, 5000, 10000],  //富豪
     };
-    //机器人配置
-    const ROBOT_NUM_CONFIG = {
-        "101": [100, 150, 200, 300],  //新手
-        "102": [70, 100, 130, 200],  //小资
-        "103": [30, 60, 100, 150],  //老板
-        "104": [10, 30, 60, 90],  //富豪
+    const ONLINE_NUM_RATE_CONFIG = {
+        "101": 0.6,     //新手
+        "102": 0.5,   //小资
+        "103": 0.4,  //老板
+        "104": 0.35,  //富豪
     };
     export class HongheiMapPage extends game.gui.base.Page {
         private _viewUI: ui.ajqp.game_ui.honghei.HongHeiUI;
@@ -75,7 +74,7 @@ module gamehonghei.page {
         private _htmlText: laya.html.dom.HTMLDivElement;
         private _htmlTextArr: Array<laya.html.dom.HTMLDivElement>;
         private _resultArry: Array<number> = [];
-        private _robotConfig: any;//机器人配置
+        private _onlineNumRate: number = 1;//在线人数比例
 
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
             super(v, onOpenFunc, onCloseFunc);
@@ -459,19 +458,17 @@ module gamehonghei.page {
 
         //更新在线人数
         private updateOnline() {
-            if (!this._robotConfig) return;
-            let onlineNum = 0;
+            let unitNum = 0;
             for (let key in this._game.sceneObjectMgr.unitDic) {
                 if (this._game.sceneObjectMgr.unitDic.hasOwnProperty(key)) {
                     let unit = this._game.sceneObjectMgr.unitDic[key];
                     if (unit) {
-                        onlineNum++;
+                        unitNum++;
                     }
                 }
             }
-            let curHour = Sync.getHours(this._game.sync.serverTimeBys * 1000);//当前几点钟
-            let index = curHour >= 1 && curHour < 7 ? 0 : curHour >= 7 && curHour < 13 ? 1 : curHour >= 13 && curHour < 19 ? 2 : 3;
-            let innerHtml = StringU.substitute("在线<span style='color:#18ff00'>{0}</span>人", onlineNum + this._robotConfig[index]);
+            let onlineNum = Math.floor(this._game.datingGame.OnlineNumMgr.getOnlineNum(this._hongheiMapInfo.GetMapID()) * this._onlineNumRate);
+            let innerHtml = StringU.substitute("在线<span style='color:#18ff00'>{0}</span>人", unitNum + onlineNum);
             this._htmlText.innerHTML = innerHtml;
         }
 
@@ -767,7 +764,7 @@ module gamehonghei.page {
             playerIcon.img_di.visible = false;
             //飘字
             clip_money.setText(Math.abs(value), true, false, preSkin);
-            clip_money.centerX = playerIcon.clip_money.centerX;
+            clip_money.centerX = playerIcon.clip_money.centerX - 4;
             clip_money.centerY = playerIcon.clip_money.centerY;
             playerIcon.clip_money.parent.addChild(clip_money);
             this._clipList.push(clip_money);
@@ -776,7 +773,7 @@ module gamehonghei.page {
             playerIcon.box_clip.y = 57;
             playerIcon.box_clip.visible = true;
             Laya.Tween.clearAll(playerIcon.box_clip);
-            Laya.Tween.to(playerIcon.box_clip, { y: playerIcon.box_clip.y - 50 }, 1000);
+            Laya.Tween.to(playerIcon.box_clip, { y: playerIcon.box_clip.y - 55 }, 700);
             //赢钱动画
             playerIcon.effWin.visible = value > 0;
             value > 0 && playerIcon.effWin.ani1.play(0, false);
@@ -821,6 +818,7 @@ module gamehonghei.page {
                 case MAP_STATUS.PLAY_STATUS_NONE:// 准备阶段
                     break;
                 case MAP_STATUS.PLAY_STATUS_GAMESTART:// 游戏开始
+                    this.updateOnline();
                     this._viewUI.txt_status.text = "";
                     this._viewUI.box_status.visible = true;
                     this._viewUI.clip_status.index = 0;
@@ -1144,7 +1142,7 @@ module gamehonghei.page {
 
         //选择筹码
         private onSelectChip(index: number): void {
-            if (this._game.sceneObjectMgr.mainUnit.GetMoney() < this._chipArr[0]) {
+            if (this._game.sceneObjectMgr.mainUnit && this._game.sceneObjectMgr.mainUnit.GetMoney() < this._chipArr[0]) {
                 this._curChip = -1;
                 for (let i: number = 0; i < this._chipUIList.length; i++) {
                     this._chipUIList[i].y = this._curChipY;
@@ -1169,10 +1167,10 @@ module gamehonghei.page {
         private onChipDisabled(isBetState: boolean): void {
             this._viewUI.btn_repeat.disabled = !isBetState;
             if (isBetState) {
-                Laya.Tween.to(this._viewUI.btn_repeat, { y: this._btnRepeatY }, 300);
-                if(){
-                    
+                if (this._curChip == -1 && this._game.sceneObjectMgr.mainUnit.GetMoney() >= this._chipArr[0]) {
+                    this._curChip = this._chipArr[0];
                 }
+                Laya.Tween.to(this._viewUI.btn_repeat, { y: this._btnRepeatY }, 300);
                 let index = this._chipArr.indexOf(this._curChip);
                 for (let i: number = 0; i < this._chipUIList.length; i++) {
                     this._isTweenOver = false;
@@ -1392,6 +1390,7 @@ module gamehonghei.page {
             this._viewUI.paixieRight.ani2.gotoAndStop(0);
             this._viewUI.box_hong.visible = false;
             this._viewUI.box_hei.visible = false;
+            this._viewUI.box_room_left.visible = false;
             this._viewUI.btn_repeat.disabled = true;
         }
 
@@ -1413,11 +1412,8 @@ module gamehonghei.page {
                 this._chipArr = ROOM_CHIP_CONFIG[maplv];
                 this._seatlimit = MONEY_LIMIT_CONFIG[maplv][1];
                 this._betlimit = MONEY_LIMIT_CONFIG[maplv][2];
-                this._robotConfig = ROBOT_NUM_CONFIG[maplv];
+                this._onlineNumRate = ONLINE_NUM_RATE_CONFIG[maplv];
 
-                if (this._robotConfig) {
-                    this.updateOnline();
-                }
                 if (!this._chipArr) return;
                 for (let i = 0; i < this._chipArr.length; i++) {
                     this._chipUIList[i].btn_num.label = EnumToString.sampleChipNum(this._chipArr[i]);
