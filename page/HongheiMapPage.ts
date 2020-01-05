@@ -81,10 +81,9 @@ module gamehonghei.page {
             this._isNeedDuang = false;
             this._delta = 1000;
             this._asset = [
-                DatingPath.atlas_dating_ui + "qifu.atlas",
-                PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
                 Path_game_honghei.atlas_game_ui + "honghei.atlas",
                 Path_game_honghei.atlas_game_ui_honghei_effect + "kaipai.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "pai.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
