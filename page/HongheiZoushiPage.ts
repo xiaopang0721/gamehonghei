@@ -13,8 +13,9 @@ module gamehonghei.page {
             this._isClickBlack = true;
             this._isNeedDuang = false;
             this._asset = [
+                PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
                 Path_game_honghei.atlas_game_ui + "honghei.atlas",
-                PathGameTongyong.atlas_game_ui_tongyong+ "general.atlas",
             ];
         }
 
@@ -22,15 +23,15 @@ module gamehonghei.page {
         protected init(): void {
             this._viewUI = this.createView('game_ui.honghei.HongHeiZouShiTuUI');
             this.addChild(this._viewUI);
-            
+
             let textureTypes = {
                 "R": PathGameTongyong.ui_tongyong_general + "tu_yq2.png",//红
                 "B": PathGameTongyong.ui_tongyong_general + "tu_yq1.png",//黑
             }
             this._gridEditor = new GridEditor(38.9, 38.9, 20, 6, textureTypes, false)
-			this._gridEditor.x = 1.2;
-			this._gridEditor.y = 1.4;
-			this._viewUI.box_road.addChild(this._gridEditor);
+            this._gridEditor.x = 1.2;
+            this._gridEditor.y = 1.4;
+            this._viewUI.box_road.addChild(this._gridEditor);
         }
 
         private renderHandler1(cell: MapRecordRender1, index: number) {
