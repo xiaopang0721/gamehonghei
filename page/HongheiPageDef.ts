@@ -33,7 +33,7 @@ module gamehonghei.page {
 
 			this["__needLoadAsset"] = [
 				Path_game_honghei.atlas_game_ui + "honghei.atlas",
-				Path_game_honghei.atlas_game_ui + "honghei/effect/bipai.atlas",
+				Path_game_honghei.atlas_game_ui_honghei_effect + "kaipai.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "pai.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
@@ -42,11 +42,11 @@ module gamehonghei.page {
 				PathGameTongyong.atlas_game_ui_tongyong + "chongzhi.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "nyl.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "yq.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/fapai_1.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/xipai.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/kaipai.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong_general + "anniu.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong_general_effect + "anniug.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong_general_effect + "fapai_1.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong_general_effect + "xipai.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong_general_effect + "kaipai.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong_general_effect + "ksyx.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong_general_effect + "ksxz.atlas",
 
